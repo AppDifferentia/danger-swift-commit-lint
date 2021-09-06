@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "DangerSwiftCoverage",
+        "repositoryURL": "https://github.com/f-meloni/danger-swift-coverage",
+        "state": {
+          "branch": null,
+          "revision": "6a21a6e595e2b13443428942ce128b3ba6b827ee",
+          "version": "1.2.1"
+        }
+      },
+      {
         "package": "Komondor",
         "repositoryURL": "https://github.com/shibapm/Komondor",
         "state": {
@@ -143,6 +152,15 @@
           "branch": null,
           "revision": "200046c93f6d5d78a6d72bfd9c0b27a95e9c0a2b",
           "version": "1.2.0"
+        }
+      },
+      {
+        "package": "Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
+        "state": {
+          "branch": null,
+          "revision": "9ff1cc9327586db4e0c8f46f064b6a82ec1566fa",
+          "version": "4.0.6"
         }
       }
     ]
