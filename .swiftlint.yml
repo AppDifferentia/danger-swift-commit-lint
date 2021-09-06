@@ -1,0 +1,17 @@
+included:
+  - Sources
+  - Tests
+excluded:
+  - Tests/**/XCTestManifests.swift # auto generated file
+identifier_name:
+  excluded:
+    - ci
+    - id
+    - pr
+line_length:
+  warning: 150 # Default 120
+  error: 300 # Default 200
+  ignores_comments: true
+  ignores_urls: true
+disabled_rules:
+  - trailing_comma

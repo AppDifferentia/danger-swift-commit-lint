@@ -1,0 +1,38 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    name: "🚫 Run Danger"
+    steps:
+      - uses: actions/checkout@v1
+      - run: npm install -g danger
+      - run: swift run danger-swift ci -c release
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_SWIFT_GITHUB_TOKEN }}
+      LINUX_SOURCEKIT_LIB_PATH: /usr/share/swift/usr/lib
+
+  linux:
+    runs-on: ubuntu-latest
+    name: "🐧 Linux Test & Verify"
+    steps:
+      - uses: actions/checkout@v1
+      - run: npm install -g danger
+      - run: swift test
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  macos:
+    runs-on: macos-11
+    name: " MacOS Test & Verify"
+    steps:
+      - uses: actions/checkout@v1
+      - run: npm install -g danger
+      - run: swift test
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
