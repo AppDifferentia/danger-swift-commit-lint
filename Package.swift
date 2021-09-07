@@ -22,10 +22,7 @@ let package = Package(
         .target(name: "DangerSwiftCommitLint", dependencies: [.product(name: "Danger", package: "danger-swift")]),
         .testTarget(
             name: "DangerSwiftCommitLintTests",
-            dependencies: [
-                "DangerSwiftCommitLint",
-                .product(name: "DangerFixtures", package: "danger-swift"),
-            ]
+            dependencies: ["DangerSwiftCommitLint"]
         ),
     ]
 )

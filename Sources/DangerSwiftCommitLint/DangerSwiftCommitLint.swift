@@ -1,4 +1,4 @@
 import Danger
 import Foundation
 
-final class DangerSwiftCommitLint {}
+public final class DangerSwiftCommitLint {}
