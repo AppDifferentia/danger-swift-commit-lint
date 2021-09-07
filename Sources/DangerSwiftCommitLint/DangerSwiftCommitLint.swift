@@ -29,8 +29,8 @@ public final class DangerSwiftCommitLint {
 }
 
 extension DangerSwiftCommitLint {
-    var commitMessages: [CommitMessage] {
-        let messages = danger.git.commits.map { CommitMessage($0) }
+    var commitMessages: [GitCommitMessage] {
+        let messages = danger.git.commits.map { GitCommitMessage($0) }
         guard configuration.limit > 0 else {
             return messages
         }
@@ -58,7 +58,7 @@ extension DangerSwiftCommitLint {
 }
 
 extension Array where Element == CommitChecker.Type {
-    func checkCommitMessages(_ commitMessages: [CommitMessage], checkerResultHanler: (String, [String]) -> Void) {
+    func checkCommitMessages(_ commitMessages: [GitCommitMessage], checkerResultHanler: (String, [String]) -> Void) {
         forEach { checker in
             let shas = commitMessages.compactMap { checker.fail($0) ? $0.sha : nil }
             if shas.isEmpty == false {

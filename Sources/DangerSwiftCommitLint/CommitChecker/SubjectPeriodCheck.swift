@@ -5,7 +5,7 @@ struct SubjectPeriodCheck: CommitChecker, Hashable {
 
     private let subject: String
 
-    init(_ commitMessage: CommitMessage) {
+    init(_ commitMessage: GitCommitMessage) {
         subject = commitMessage.subject
     }
 

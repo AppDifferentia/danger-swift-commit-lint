@@ -5,7 +5,7 @@ struct BodyEmptyLineCheck: CommitChecker, Hashable {
 
     private let bodyLinesOfText: [String]
 
-    init(_ commitMessage: CommitMessage) {
+    init(_ commitMessage: GitCommitMessage) {
         bodyLinesOfText = commitMessage.bodyLinesOfText
     }
 

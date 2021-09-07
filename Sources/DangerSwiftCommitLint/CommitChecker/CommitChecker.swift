@@ -5,13 +5,13 @@ public protocol CommitChecker {
 
     var fail: Bool { get }
 
-    init(_ commitMessage: CommitMessage)
+    init(_ commitMessage: GitCommitMessage)
 
-    static func fail(_ commitMessage: CommitMessage) -> Bool
+    static func fail(_ commitMessage: GitCommitMessage) -> Bool
 }
 
 public extension CommitChecker {
-    static func fail(_ commitMessage: CommitMessage) -> Bool {
+    static func fail(_ commitMessage: GitCommitMessage) -> Bool {
         Self(commitMessage).fail
     }
 }

@@ -5,7 +5,7 @@ struct SubjectCapCheck: CommitChecker, Hashable {
 
     private let firstCharacter: Character?
 
-    init(_ commitMessage: CommitMessage) {
+    init(_ commitMessage: GitCommitMessage) {
         firstCharacter = commitMessage.subject.first
     }
 

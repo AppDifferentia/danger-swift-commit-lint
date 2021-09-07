@@ -55,7 +55,7 @@ private struct MockChecker: CommitChecker {
 
     static var checkerMessage = "Test message"
 
-    init(_: CommitMessage) {
+    init(_: GitCommitMessage) {
         // Intentionally left empty
     }
 }

@@ -3,14 +3,14 @@ import XCTest
 
 final class SubjectLengthCheckTests: XCTestCase {
     func testSuccess() {
-        let commitMessage = CommitMessage(subject: "Valid title", bodyLinesOfText: [], sha: "Test SHA")
+        let commitMessage = GitCommitMessage(subject: "Valid title", bodyLinesOfText: [], sha: "Test SHA")
         let testSubject = SubjectLengthCheck(commitMessage)
         XCTAssertFalse(testSubject.fail)
         XCTAssertFalse(SubjectLengthCheck.fail(commitMessage))
     }
 
     func testFailure() {
-        let commitMessage = CommitMessage(
+        let commitMessage = GitCommitMessage(
             subject: "This is a long git commit subject for testing purpose.",
             bodyLinesOfText: [],
             sha: "Test SHA"
@@ -21,7 +21,7 @@ final class SubjectLengthCheckTests: XCTestCase {
     }
 
     func testSuccessWithGitHubMergeCommit() {
-        let commitMessage = CommitMessage(
+        let commitMessage = GitCommitMessage(
             subject: "Merge pull request #123 from AppDifferentia/test-branching",
             bodyLinesOfText: [],
             sha: "Test SHA"
@@ -32,7 +32,7 @@ final class SubjectLengthCheckTests: XCTestCase {
     }
 
     func testSuccessWithGitMergeCommit() {
-        let commitMessage = CommitMessage(
+        let commitMessage = GitCommitMessage(
             subject: "Merge branch 'master' into AppDifferentia/test-branching",
             bodyLinesOfText: [],
             sha: "Test SHA"

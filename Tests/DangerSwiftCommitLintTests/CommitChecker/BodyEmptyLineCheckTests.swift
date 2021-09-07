@@ -3,9 +3,9 @@ import Danger
 import XCTest
 
 final class BodyEmptyLineCheckTests: XCTestCase {
-    private let commitSubjectAndBody = CommitMessage(subject: "Title Test", bodyLinesOfText: ["", "Body Test"], sha: "Test SHA")
-    private let commitSubjectOnly = CommitMessage(subject: "Title Test", bodyLinesOfText: [], sha: "Test SHA")
-    private let commitNoNewline = CommitMessage(subject: "Title Test", bodyLinesOfText: ["Body Test"], sha: "Test SHA")
+    private let commitSubjectAndBody = GitCommitMessage(subject: "Title Test", bodyLinesOfText: ["", "Body Test"], sha: "Test SHA")
+    private let commitSubjectOnly = GitCommitMessage(subject: "Title Test", bodyLinesOfText: [], sha: "Test SHA")
+    private let commitNoNewline = GitCommitMessage(subject: "Title Test", bodyLinesOfText: ["Body Test"], sha: "Test SHA")
 
     func testSuccessCommitSubjectAndBody() {
         let testSubject = BodyEmptyLineCheck(commitSubjectAndBody)

@@ -1,8 +1,8 @@
 import Danger
 import Foundation
 
-/// An abstraction of GitHub commit message.
-public struct CommitMessage: Hashable {
+/// An abstraction of Git commit message for `DangerSwiftCommitLint`.
+public struct GitCommitMessage: Hashable {
     /// First line of the commit message
     public let subject: String
     /// Rest of the commit message
@@ -20,16 +20,7 @@ public struct CommitMessage: Hashable {
         self.sha = sha
     }
 
-    /// Initialize CommitMessage with `Danger.GitHub.Commit.CommitData.message`.
-    /// - Parameter commit: An instance of `GitHub.Commit`
-    public init(_ commit: GitHub.Commit) {
-        let commitMessageLines = commit.commit.message.components(separatedBy: .newlines)
-        subject = commitMessageLines.first ?? ""
-        bodyLinesOfText = Array(commitMessageLines.dropFirst())
-        sha = commit.sha
-    }
-
-    /// Initialize `CommitMessage` with `Danger.Git.Commit.message`
+    /// Initialize `GitCommitMessage` with `Danger.Git.Commit.message`
     /// - Parameter gitCommit: An instance of `Danger.Git.Commit`
     public init(_ gitCommit: Git.Commit) {
         let commitMessageLines = gitCommit.message.components(separatedBy: .newlines)

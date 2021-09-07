@@ -4,9 +4,9 @@ import XCTest
 
 final class CommitMessageTests: XCTestCase {
     func testInitializeWithDangerGitHubCommit() {
-        let commit = CommitParser.parseCommitJSON(with: commitMessageJSON)
-        let expectedCommitMessage = commit.commit.message.components(separatedBy: .newlines)
-        let testSubject = CommitMessage(commit)
+        let commit = CommitParser.parseCommitJSON(with: gitCommitJSON)
+        let expectedCommitMessage = commit.message.components(separatedBy: .newlines)
+        let testSubject = GitCommitMessage(commit)
         XCTAssertEqual(testSubject.sha, commit.sha)
         XCTAssertEqual(
             [
