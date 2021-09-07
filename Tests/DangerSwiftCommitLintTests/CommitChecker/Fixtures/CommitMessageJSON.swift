@@ -1,3 +1,4 @@
+// swiftlint:disable line_length
 let commitMessageJSON = """
 {
     "sha": "93ae30cf2aee4241c442fb3242543490998cffdb",
@@ -76,3 +77,4 @@ let commitMessageJSON = """
     ]
 }
 """
+// swiftlint:enable line_length
