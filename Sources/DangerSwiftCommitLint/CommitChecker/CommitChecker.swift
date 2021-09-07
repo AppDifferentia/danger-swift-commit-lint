@@ -1,16 +1,17 @@
 import Foundation
 
-protocol CommitChecker: Hashable {
-    static var warningMessage: String { get }
+public protocol CommitChecker {
+    static var checkerMessage: String { get }
+
     var fail: Bool { get }
 
-    init(message: CommitMessage)
+    init(_ commitMessage: CommitMessage)
 
-    static func fail(message: CommitMessage) -> Bool
+    static func fail(_ commitMessage: CommitMessage) -> Bool
 }
 
-extension CommitChecker {
-    static func fail(message: CommitMessage) -> Bool {
-        Self(message: message).fail
+public extension CommitChecker {
+    static func fail(_ commitMessage: CommitMessage) -> Bool {
+        Self(commitMessage).fail
     }
 }

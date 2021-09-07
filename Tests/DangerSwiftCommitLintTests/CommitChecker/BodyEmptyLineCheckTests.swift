@@ -8,20 +8,20 @@ final class BodyEmptyLineCheckTests: XCTestCase {
     private let commitNoNewline = CommitMessage(subject: "Title Test", bodyLinesOfText: ["Body Test"], sha: "Test SHA")
 
     func testSuccessCommitSubjectAndBody() {
-        let testSubject = BodyEmptyLineCheck(message: commitSubjectAndBody)
+        let testSubject = BodyEmptyLineCheck(commitSubjectAndBody)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(BodyEmptyLineCheck.fail(message: commitSubjectAndBody))
+        XCTAssertFalse(BodyEmptyLineCheck.fail(commitSubjectAndBody))
     }
 
     func testSuccessSubjectOnly() {
-        let testSubject = BodyEmptyLineCheck(message: commitSubjectOnly)
+        let testSubject = BodyEmptyLineCheck(commitSubjectOnly)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(BodyEmptyLineCheck.fail(message: commitSubjectOnly))
+        XCTAssertFalse(BodyEmptyLineCheck.fail(commitSubjectOnly))
     }
 
     func testFailureNoNewlineOnly() {
-        let testSubject = BodyEmptyLineCheck(message: commitNoNewline)
+        let testSubject = BodyEmptyLineCheck(commitNoNewline)
         XCTAssertTrue(testSubject.fail)
-        XCTAssertTrue(BodyEmptyLineCheck.fail(message: commitNoNewline))
+        XCTAssertTrue(BodyEmptyLineCheck.fail(commitNoNewline))
     }
 }

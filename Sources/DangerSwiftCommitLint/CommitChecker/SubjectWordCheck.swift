@@ -1,12 +1,12 @@
 import Foundation
 
-struct SubjectWordCheck: CommitChecker {
-    static var warningMessage = "Please use more than one word in commit message."
+struct SubjectWordCheck: CommitChecker, Hashable {
+    static var checkerMessage = "Please use more than one word in commit message."
 
     private let subject: String
 
-    init(message: CommitMessage) {
-        subject = message.subject
+    init(_ commitMessage: CommitMessage) {
+        subject = commitMessage.subject
     }
 
     var fail: Bool {

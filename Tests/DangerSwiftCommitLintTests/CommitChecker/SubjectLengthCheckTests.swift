@@ -4,9 +4,9 @@ import XCTest
 final class SubjectLengthCheckTests: XCTestCase {
     func testSuccess() {
         let commitMessage = CommitMessage(subject: "Valid title", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectLengthCheck(message: commitMessage)
+        let testSubject = SubjectLengthCheck(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectLengthCheck.fail(message: commitMessage))
+        XCTAssertFalse(SubjectLengthCheck.fail(commitMessage))
     }
 
     func testFailure() {
@@ -15,9 +15,9 @@ final class SubjectLengthCheckTests: XCTestCase {
             bodyLinesOfText: [],
             sha: "Test SHA"
         )
-        let testSubject = SubjectLengthCheck(message: commitMessage)
+        let testSubject = SubjectLengthCheck(commitMessage)
         XCTAssertTrue(testSubject.fail)
-        XCTAssertTrue(SubjectLengthCheck.fail(message: commitMessage))
+        XCTAssertTrue(SubjectLengthCheck.fail(commitMessage))
     }
 
     func testSuccessWithGitHubMergeCommit() {
@@ -26,9 +26,9 @@ final class SubjectLengthCheckTests: XCTestCase {
             bodyLinesOfText: [],
             sha: "Test SHA"
         )
-        let testSubject = SubjectLengthCheck(message: commitMessage)
+        let testSubject = SubjectLengthCheck(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectLengthCheck.fail(message: commitMessage))
+        XCTAssertFalse(SubjectLengthCheck.fail(commitMessage))
     }
 
     func testSuccessWithGitMergeCommit() {
@@ -37,8 +37,8 @@ final class SubjectLengthCheckTests: XCTestCase {
             bodyLinesOfText: [],
             sha: "Test SHA"
         )
-        let testSubject = SubjectLengthCheck(message: commitMessage)
+        let testSubject = SubjectLengthCheck(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectLengthCheck.fail(message: commitMessage))
+        XCTAssertFalse(SubjectLengthCheck.fail(commitMessage))
     }
 }

@@ -1,17 +1,17 @@
 import Foundation
 
-struct SubjectLengthCheck: CommitChecker {
+struct SubjectLengthCheck: CommitChecker, Hashable {
     private enum GeneratedSubjectPattern {
         static let git = #"^Merge branch '.+' into "#
         static let gitHub = #"^Merge pull request #\d+ from "#
     }
 
-    static let warningMessage = "Please limit commit message subject line to 50 characters."
+    static let checkerMessage = "Please limit commit message subject line to 50 characters."
 
     private let subject: String
 
-    init(message: CommitMessage) {
-        subject = message.subject
+    init(_ commitMessage: CommitMessage) {
+        subject = commitMessage.subject
     }
 
     var fail: Bool {

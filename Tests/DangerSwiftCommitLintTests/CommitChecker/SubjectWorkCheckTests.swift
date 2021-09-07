@@ -4,15 +4,15 @@ import XCTest
 final class SubjectWordCheckTests: XCTestCase {
     func testSuccess() {
         let commitMessage = CommitMessage(subject: "Test title more than one word", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectWordCheck(message: commitMessage)
+        let testSubject = SubjectWordCheck(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectWordCheck.fail(message: commitMessage))
+        XCTAssertFalse(SubjectWordCheck.fail(commitMessage))
     }
 
     func testFailure() {
         let commitMessage = CommitMessage(subject: "Failure", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectWordCheck(message: commitMessage)
+        let testSubject = SubjectWordCheck(commitMessage)
         XCTAssertTrue(testSubject.fail)
-        XCTAssertTrue(SubjectWordCheck.fail(message: commitMessage))
+        XCTAssertTrue(SubjectWordCheck.fail(commitMessage))
     }
 }

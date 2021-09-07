@@ -1,12 +1,12 @@
 import Foundation
 
-struct BodyEmptyLineCheck: CommitChecker {
-    static var warningMessage = "Please separate commit message subject from body with newline."
+struct BodyEmptyLineCheck: CommitChecker, Hashable {
+    static var checkerMessage = "Please separate commit message subject from body with newline."
 
     private let bodyLinesOfText: [String]
 
-    init(message: CommitMessage) {
-        bodyLinesOfText = message.bodyLinesOfText
+    init(_ commitMessage: CommitMessage) {
+        bodyLinesOfText = commitMessage.bodyLinesOfText
     }
 
     var fail: Bool {

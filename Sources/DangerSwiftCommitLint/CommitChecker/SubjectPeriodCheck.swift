@@ -1,12 +1,12 @@
 import Foundation
 
-struct SubjectPeriodCheck: CommitChecker {
-    static var warningMessage = "Please remove period from end of commit message subject line."
+struct SubjectPeriodCheck: CommitChecker, Hashable {
+    static var checkerMessage = "Please remove period from end of commit message subject line."
 
     private let subject: String
 
-    init(message: CommitMessage) {
-        subject = message.subject
+    init(_ commitMessage: CommitMessage) {
+        subject = commitMessage.subject
     }
 
     var fail: Bool {
