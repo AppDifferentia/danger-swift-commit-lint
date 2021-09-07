@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm install -g danger
-      - run: swift run danger-swift ci -c release
+      - run: swift run danger-swift ci -c release --id "Lint"
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_SWIFT_GITHUB_TOKEN }}
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v1
       - run: npm install -g danger
       - run: swift test --enable-code-coverage
-      - run: swift run danger-swift ci -c release --dangerfile DangerfileCoverage.swift
+      - run: swift run danger-swift ci -c release --dangerfile DangerfileCoverage.swift --id "Coverage"
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_SWIFT_GITHUB_TOKEN }}
