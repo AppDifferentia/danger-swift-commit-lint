@@ -1,34 +1,35 @@
 import Foundation
 
 public extension DangerSwiftCommitLint {
-    struct Configuration {
-        /// All commit checkers provided by `DangerSwiftCommitLint`
-        public enum CommitCheckerType: CaseIterable, Hashable {
-            /// Commit subject and body are separated by an empty line (`CommitChecker/BodyEmptyLineCheck`)
-            case bodyEmptyLine
-            /// Commit subject begins with a capital letter (`CommitChecker/SubjectCapCheck`)
-            case subjectCapCheck
-            /// Commit subject is no longer than 50 characters (`CommitChecker/SubjectLengthCheck`)
-            case subjectLengthCheck
-            /// Commit subject does not end in a period (`CommitChecker/SubjectPeriodCheck`)
-            case subjectPeriodCheck
-            /// Commit subject is more than one word (`CommitChecker/SubjectWordCheck`)
-            case subjectWordCheck
-        }
+    /// All commit checkers provided by `DangerSwiftCommitLint`
+    enum CommitCheckerType: CaseIterable, Hashable {
+        /// Commit subject and body are separated by an empty line (`CommitChecker/BodyEmptyLineCheck`)
+        case bodyEmptyLine
+        /// Commit subject begins with a capital letter (`CommitChecker/SubjectCapCheck`)
+        case subjectCapitalLetter
+        /// Commit subject is no longer than 50 characters (`CommitChecker/SubjectLengthCheck`)
+        case subjectLength
+        /// Commit subject does not end in a period (`CommitChecker/SubjectPeriodCheck`)
+        case subjectPeriod
+        /// Commit subject is more than one word (`CommitChecker/SubjectWordCheck`)
+        case subjectWord
+    }
 
-        /// Checker selection
-        public enum CommitCheckerSelection {
-            /// Select all checkers
-            case all
-            /// Select a set of checkers
-            case selected(Set<CommitCheckerType>)
-        }
+    /// Checker selection
+    enum CommitCheckerSelection {
+        /// Select all checkers
+        case all
+        /// Select a set of checkers
+        case selected(Set<CommitCheckerType>)
+    }
+
+    struct Configuration {
+        let limit: Int
 
         private let disabled: CommitCheckerSelection
         private let warn: CommitCheckerSelection
         private let fail: CommitCheckerSelection
-        let limit: Int
-        private let customCheckers: [CommitChecker.Type]
+        private let customCheckers: [CommitLint.Type]
 
         /// Initialize the configuraiton.
         /// - Parameters:
@@ -42,7 +43,7 @@ public extension DangerSwiftCommitLint {
             warn: CommitCheckerSelection = .selected([]),
             fail: CommitCheckerSelection = .all,
             limit: Int = 0,
-            customCheckers: [CommitChecker.Type] = []
+            customCheckers: [CommitLint.Type] = []
         ) {
             self.disabled = disabled
             self.warn = warn
@@ -54,15 +55,15 @@ public extension DangerSwiftCommitLint {
 }
 
 extension DangerSwiftCommitLint.Configuration {
-    static var defaultCheckers: [CommitChecker.Type] {
-        CommitCheckerType.allCases.map(\.type)
+    static var defaultCheckers: [CommitLint.Type] {
+        DangerSwiftCommitLint.CommitCheckerType.allCases.map(\.type)
     }
 
-    var allCheckers: [CommitChecker.Type] {
+    var allCheckers: [CommitLint.Type] {
         Self.defaultCheckers + customCheckers
     }
 
-    var disabledCheckers: [CommitChecker.Type] {
+    var disabledCheckers: [CommitLint.Type] {
         switch disabled {
         case .all:
             return allCheckers
@@ -71,13 +72,13 @@ extension DangerSwiftCommitLint.Configuration {
         }
     }
 
-    var enabledCheckers: [CommitChecker.Type] {
+    var enabledCheckers: [CommitLint.Type] {
         allCheckers.filter { checker in
             disabledCheckers.contains { $0 == checker } == false
         }
     }
 
-    var warningCheckers: [CommitChecker.Type] {
+    var warningCheckers: [CommitLint.Type] {
         switch warn {
         case .all:
             return allCheckers
@@ -88,21 +89,21 @@ extension DangerSwiftCommitLint.Configuration {
         }
     }
 
-    var failingCheckers: [CommitChecker.Type] {
+    var failingCheckers: [CommitLint.Type] {
         enabledCheckers.filter { type in
             warningCheckers.contains { $0 == type } == false
         }
     }
 }
 
-private extension DangerSwiftCommitLint.Configuration.CommitCheckerType {
-    var type: CommitChecker.Type {
+private extension DangerSwiftCommitLint.CommitCheckerType {
+    var type: CommitLint.Type {
         switch self {
-        case .bodyEmptyLine: return BodyEmptyLineCheck.self
-        case .subjectCapCheck: return SubjectCapCheck.self
-        case .subjectLengthCheck: return SubjectCapCheck.self
-        case .subjectPeriodCheck: return SubjectPeriodCheck.self
-        case .subjectWordCheck: return SubjectWordCheck.self
+        case .bodyEmptyLine: return BodyEmptyLine.self
+        case .subjectCapitalLetter: return SubjectCapitalLetter.self
+        case .subjectLength: return SubjectCapitalLetter.self
+        case .subjectPeriod: return SubjectPeriod.self
+        case .subjectWord: return SubjectWord.self
         }
     }
 }

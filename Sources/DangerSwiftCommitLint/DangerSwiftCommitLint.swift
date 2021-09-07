@@ -57,12 +57,12 @@ extension DangerSwiftCommitLint {
     }
 }
 
-extension Array where Element == CommitChecker.Type {
+extension Array where Element == CommitLint.Type {
     func checkCommitMessages(_ commitMessages: [GitCommitMessage], checkerResultHanler: (String, [String]) -> Void) {
         forEach { checker in
             let shas = commitMessages.compactMap { checker.fail($0) ? $0.sha : nil }
             if shas.isEmpty == false {
-                checkerResultHanler(checker.checkerMessage, shas)
+                checkerResultHanler(checker.linterMessage, shas)
             }
         }
     }

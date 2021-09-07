@@ -50,17 +50,17 @@ final class DangerSwiftCommitLintConfigurationTests: XCTestCase {
     }
 }
 
-private struct MockChecker: CommitChecker {
+private struct MockChecker: CommitLint {
     var fail: Bool { false }
 
-    static var checkerMessage = "Test message"
+    static var linterMessage = "Test message"
 
     init(_: GitCommitMessage) {
         // Intentionally left empty
     }
 }
 
-private extension Array where Element == CommitChecker.Type {
+private extension Array where Element == CommitLint.Type {
     func isEqual(to other: [Element]) -> Bool {
         String(describing: self) == String(describing: other)
     }

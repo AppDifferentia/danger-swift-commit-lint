@@ -1,7 +1,7 @@
 import Foundation
 
-public protocol CommitChecker {
-    static var checkerMessage: String { get }
+public protocol CommitLint {
+    static var linterMessage: String { get }
 
     var fail: Bool { get }
 
@@ -10,7 +10,7 @@ public protocol CommitChecker {
     static func fail(_ commitMessage: GitCommitMessage) -> Bool
 }
 
-public extension CommitChecker {
+public extension CommitLint {
     static func fail(_ commitMessage: GitCommitMessage) -> Bool {
         Self(commitMessage).fail
     }

@@ -4,15 +4,15 @@ import XCTest
 final class SubjectPeriodCheckTests: XCTestCase {
     func testSuccess() {
         let commitMessage = GitCommitMessage(subject: "Test title without period at the end", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectPeriodCheck(commitMessage)
+        let testSubject = SubjectPeriod(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectPeriodCheck.fail(commitMessage))
+        XCTAssertFalse(SubjectPeriod.fail(commitMessage))
     }
 
     func testFailure() {
         let commitMessage = GitCommitMessage(subject: "Test title with period at the end.", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectPeriodCheck(commitMessage)
+        let testSubject = SubjectPeriod(commitMessage)
         XCTAssertTrue(testSubject.fail)
-        XCTAssertTrue(SubjectPeriodCheck.fail(commitMessage))
+        XCTAssertTrue(SubjectPeriod.fail(commitMessage))
     }
 }

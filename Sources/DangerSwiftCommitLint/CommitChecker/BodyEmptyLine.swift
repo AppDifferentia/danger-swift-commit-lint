@@ -1,7 +1,7 @@
 import Foundation
 
-struct BodyEmptyLineCheck: CommitChecker, Hashable {
-    static var checkerMessage = "Please separate commit message subject from body with newline."
+struct BodyEmptyLine: CommitLint, Hashable {
+    static var linterMessage = "Please separate commit message subject from body with newline."
 
     private let bodyLinesOfText: [String]
 

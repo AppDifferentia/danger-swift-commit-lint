@@ -1,7 +1,7 @@
 import Foundation
 
-struct SubjectWordCheck: CommitChecker, Hashable {
-    static var checkerMessage = "Please use more than one word in commit message."
+struct SubjectWord: CommitLint, Hashable {
+    static var linterMessage = "Please use more than one word in commit message."
 
     private let subject: String
 

@@ -4,30 +4,30 @@ import XCTest
 final class SubjectCapCheckTests: XCTestCase {
     func testSuccess() {
         let commitMessage = GitCommitMessage(subject: "Subject", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectCapCheck(commitMessage)
+        let testSubject = SubjectCapitalLetter(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectCapCheck.fail(commitMessage))
+        XCTAssertFalse(SubjectCapitalLetter.fail(commitMessage))
     }
 
     func testFailure() {
         let commitMessage = GitCommitMessage(subject: "subject", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectCapCheck(commitMessage)
+        let testSubject = SubjectCapitalLetter(commitMessage)
         XCTAssertTrue(testSubject.fail)
-        XCTAssertTrue(SubjectCapCheck.fail(commitMessage))
+        XCTAssertTrue(SubjectCapitalLetter.fail(commitMessage))
     }
 
     func testSuccessWithNonLetterCharacters() {
         let commitMessage = GitCommitMessage(subject: "[TEST-123] Subject", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectCapCheck(commitMessage)
+        let testSubject = SubjectCapitalLetter(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectCapCheck.fail(commitMessage))
+        XCTAssertFalse(SubjectCapitalLetter.fail(commitMessage))
     }
 
     /// Git generally disallows empty commit message, so subject should at least contain non empty text. This test case is only capturing a unlikely edge case.
     func testEdgeCase() {
         let commitMessage = GitCommitMessage(subject: "", bodyLinesOfText: [], sha: "Test SHA")
-        let testSubject = SubjectCapCheck(commitMessage)
+        let testSubject = SubjectCapitalLetter(commitMessage)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(SubjectCapCheck.fail(commitMessage))
+        XCTAssertFalse(SubjectCapitalLetter.fail(commitMessage))
     }
 }

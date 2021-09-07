@@ -8,20 +8,20 @@ final class BodyEmptyLineCheckTests: XCTestCase {
     private let commitNoNewline = GitCommitMessage(subject: "Title Test", bodyLinesOfText: ["Body Test"], sha: "Test SHA")
 
     func testSuccessCommitSubjectAndBody() {
-        let testSubject = BodyEmptyLineCheck(commitSubjectAndBody)
+        let testSubject = BodyEmptyLine(commitSubjectAndBody)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(BodyEmptyLineCheck.fail(commitSubjectAndBody))
+        XCTAssertFalse(BodyEmptyLine.fail(commitSubjectAndBody))
     }
 
     func testSuccessSubjectOnly() {
-        let testSubject = BodyEmptyLineCheck(commitSubjectOnly)
+        let testSubject = BodyEmptyLine(commitSubjectOnly)
         XCTAssertFalse(testSubject.fail)
-        XCTAssertFalse(BodyEmptyLineCheck.fail(commitSubjectOnly))
+        XCTAssertFalse(BodyEmptyLine.fail(commitSubjectOnly))
     }
 
     func testFailureNoNewlineOnly() {
-        let testSubject = BodyEmptyLineCheck(commitNoNewline)
+        let testSubject = BodyEmptyLine(commitNoNewline)
         XCTAssertTrue(testSubject.fail)
-        XCTAssertTrue(BodyEmptyLineCheck.fail(commitNoNewline))
+        XCTAssertTrue(BodyEmptyLine.fail(commitNoNewline))
     }
 }

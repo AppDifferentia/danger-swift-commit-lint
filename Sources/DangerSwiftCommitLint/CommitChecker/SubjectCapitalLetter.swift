@@ -1,7 +1,7 @@
 import Foundation
 
-struct SubjectCapCheck: CommitChecker, Hashable {
-    static let checkerMessage = "Please start commit message subject with capital letter."
+struct SubjectCapitalLetter: CommitLint, Hashable {
+    static let linterMessage = "Please start commit message subject with capital letter."
 
     private let firstCharacter: Character?
 
