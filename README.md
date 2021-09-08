@@ -1,6 +1,8 @@
 # Commit Lint For Danger-Swift
 
-A [`danger-swift`]("https://github.com/danger/swift") plugin to check each commit messages on the branch. This project is inspired by [`danger-commit-lint`](https://github.com/jonallured/danger-commit_lint) and its commit linting rules are ported too.
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)
+
+A [`danger-swift`](https://github.com/danger/swift) plugin to check each commit messages on the branch. This project is inspired by [`danger-commit-lint`](https://github.com/jonallured/danger-commit_lint) and its commit linting rules are ported too.
 
 ## Installation
 
@@ -26,11 +28,11 @@ commitLint.check()
 
 That will check each commit in the PR to ensure the following is true:
 
-- Commit subject begins with a capital letter (`Sources/DangerSwiftLint/CommitLint/SubjectCapitalLetter`)
-- Commit subject is more than one word (`Sources/DangerSwiftLint/CommitLint/SubjectWord`)
-- Commit subject is no longer than 50 characters (`Sources/DangerSwiftLint/CommitLint/SubjectLength`)
-- Commit subject does not end in a period (`Sources/DangerSwiftLint/CommitLint/SubjectPeriod`)
-- Commit subject and body are separated by an empty line (`Sources/DangerSwiftLint/CommitLint/BodyEmptyLine`)
+- Commit subject begins with a capital letter ([`SubjectCapitalLetter.swift`](Sources/DangerSwiftCommitLint/CommitLint/SubjectCapitalLetter.swift))
+- Commit subject is more than one word ([`SubjectWord.swift`](Sources/DangerSwiftCommitLint/CommitLint/SubjectWord.swift))
+- Commit subject is no longer than 50 characters ([`SubjectLength.swift`](Sources/DangerSwiftCommitLint/CommitLint/SubjectLength.swift))
+- Commit subject does not end in a period ([`SubjectPeriod.swift`](Sources/DangerSwiftCommitLint/CommitLint/SubjectPeriod.swift))
+- Commit subject and body are separated by an empty line ([`BodyEmptyLine.swift`](Sources/DangerSwiftCommitLint/CommitLint/BodyEmptyLine.swift))
 
 By default, Commit Lint fails, but you can configure this behavior.
 
@@ -52,11 +54,11 @@ commitLint.check()
 
 The commit lint can be configured with following 5 parameters.
 
-- `disabled`: can be `.all` or `.selected([ ... ])`, see [`DangerSwiftCommitLint/Configuration`]("DangerSwiftCommitLint/Configuration")
-- `warn`: can be `.all` or `.selected([ ... ])`, see [`DangerSwiftCommitLint/Configuration`]("DangerSwiftCommitLint/Configuration")
-- `fail`: can be `.all` or `.selected([ ... ])`, see [`DangerSwiftCommitLint/Configuration`]("DangerSwiftCommitLint/Configuration")
+- `disabled`: can be `.all` or `.selected([ ... ])`, see [`Configuration.swift`](Sources/DangerSwiftCommitLint/Configuration.swift)
+- `warn`: can be `.all` or `.selected([ ... ])`, see [`Configuration.swift`](Sources/DangerSwiftCommitLint/Configuration.swift)
+- `fail`: can be `.all` or `.selected([ ... ])`, see [`Configuration.swift`](Sources/DangerSwiftCommitLint/Configuration.swift)
 - `limit`: limits the number commits to lint. E.g. `limit: 1` will limit the commit to the oldest commit on the branch
-- `custom`: allow caller to pass an array of custom linter that conforms to `DangerSwiftCommitLint.CommitLint` protocol
+- `custom`: allow caller to pass an array of custom linter that conforms to [`CommitLint`](Sources/DangerSwiftCommitLint/CommitLint/CommitLint.swift) protocol
 
 E.g.
 
