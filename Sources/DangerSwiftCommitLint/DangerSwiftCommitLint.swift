@@ -1,19 +1,28 @@
 import Danger
 import Foundation
 
+public protocol DangerDSLProviding {
+    var git: Git { get }
+
+    func warn(_ message: String)
+    func fail(_ message: String)
+}
+
+extension DangerDSL: DangerDSLProviding {}
+
 public final class DangerSwiftCommitLint {
     private enum Constants {
         static let disableAllChecksMessage = "All checks were disabled, nothing to do."
     }
 
-    private let danger: DangerDSL
+    private let danger: DangerDSLProviding
     private var configuration: Configuration!
 
     /// Initialize an instance of the linter
     /// - Parameters:
     ///   - danger: An instance of `Danger.DangerDSL`.
     ///   - configuration: Linter configuration.
-    init(danger: DangerDSL = Danger(), configuration: Configuration) {
+    public init(danger: DangerDSLProviding = Danger(), configuration: Configuration) {
         self.danger = danger
         self.configuration = configuration
     }
@@ -28,7 +37,7 @@ public final class DangerSwiftCommitLint {
     }
 }
 
-extension DangerSwiftCommitLint {
+private extension DangerSwiftCommitLint {
     var commitMessages: [GitCommitMessage] {
         let messages = danger.git.commits.map { GitCommitMessage($0) }
         guard configuration.limit > 0 else {
@@ -40,10 +49,10 @@ extension DangerSwiftCommitLint {
 
     func checkMessages() {
         // Checkers that warn the danger job.
-        configuration.warningCheckers.checkCommitMessages(commitMessages, checkerResultHanler: warning(_:shas:))
+        configuration.warningCheckers.checkCommitMessages(commitMessages, checkerResultHandler: warning(_:shas:))
 
         // Checkers that fail the danger job.
-        configuration.failingCheckers.checkCommitMessages(commitMessages, checkerResultHanler: failing(_:shas:))
+        configuration.failingCheckers.checkCommitMessages(commitMessages, checkerResultHandler: failing(_:shas:))
     }
 
     func warning(_ message: String, shas: [String]) {
@@ -53,16 +62,16 @@ extension DangerSwiftCommitLint {
 
     func failing(_ message: String, shas: [String]) {
         let failingMessage = ([message] + shas).joined(separator: "\n")
-        danger.warn(failingMessage)
+        danger.fail(failingMessage)
     }
 }
 
-extension Array where Element == CommitLint.Type {
-    func checkCommitMessages(_ commitMessages: [GitCommitMessage], checkerResultHanler: (String, [String]) -> Void) {
+private extension Array where Element == CommitLint.Type {
+    func checkCommitMessages(_ commitMessages: [GitCommitMessage], checkerResultHandler: (String, [String]) -> Void) {
         forEach { checker in
             let shas = commitMessages.compactMap { checker.fail($0) ? $0.sha : nil }
             if shas.isEmpty == false {
-                checkerResultHanler(checker.linterMessage, shas)
+                checkerResultHandler(checker.linterMessage, shas)
             }
         }
     }

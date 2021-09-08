@@ -31,7 +31,7 @@ public extension DangerSwiftCommitLint {
         private let fail: CommitCheckerSelection
         private let customCheckers: [CommitLint.Type]
 
-        /// Initialize the configuraiton.
+        /// Initialize the configuration.
         /// - Parameters:
         ///   - disabled: The selected checks to skip.
         ///   - warn: The selected checks to warn on.

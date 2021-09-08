@@ -39,7 +39,14 @@
         //   `swift test --generate-linuxmain`
         // to regenerate.
         static let __allTests__DangerSwiftCommitLintTests = [
-            ("testDummy", testDummy),
+            ("testCustomChecker", testCustomChecker),
+            ("testDisableAllChecks", testDisableAllChecks),
+            ("testDisableAllHasHighestPrecedence", testDisableAllHasHighestPrecedence),
+            ("testFailAllIssues", testFailAllIssues),
+            ("testGitCommitWithNoIssues", testGitCommitWithNoIssues),
+            ("testLimitingTheCheckToTwoCommits", testLimitingTheCheckToTwoCommits),
+            ("testMixedConfiguration", testMixedConfiguration),
+            ("testWarnAllIssues", testWarnAllIssues),
         ]
     }
 
