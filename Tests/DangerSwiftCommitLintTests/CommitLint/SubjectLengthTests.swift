@@ -1,7 +1,7 @@
 @testable import DangerSwiftCommitLint
 import XCTest
 
-final class SubjectLengthCheckTests: XCTestCase {
+final class SubjectLengthTests: XCTestCase {
     func testSuccess() {
         let commitMessage = GitCommitMessage(subject: "Valid title", bodyLinesOfText: [], sha: "Test SHA")
         let testSubject = SubjectLength(commitMessage)

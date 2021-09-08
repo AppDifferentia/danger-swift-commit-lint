@@ -1,7 +1,7 @@
 @testable import DangerSwiftCommitLint
 import XCTest
 
-final class SubjectPeriodCheckTests: XCTestCase {
+final class SubjectPeriodTests: XCTestCase {
     func testSuccess() {
         let commitMessage = GitCommitMessage(subject: "Test title without period at the end", bodyLinesOfText: [], sha: "Test SHA")
         let testSubject = SubjectPeriod(commitMessage)

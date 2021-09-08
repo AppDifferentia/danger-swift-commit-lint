@@ -87,8 +87,8 @@ final class DangerSwiftCommitLintTests: XCTestCase {
         let git = CommitParser.parseGit(with: gitIssuesOnLastTwoCommitsJSON)
         let mockDanger = MockDangerDSL(git: git)
         let configuration = Configuration(
-            disabled: .selected(Set<DangerSwiftCommitLint.CommitCheckerType>([.bodyEmptyLine])),
-            warn: .selected(Set<DangerSwiftCommitLint.CommitCheckerType>([.subjectPeriod, .subjectWord])),
+            disabled: .selected(Set<DangerSwiftCommitLint.CommitLintType>([.bodyEmptyLine])),
+            warn: .selected(Set<DangerSwiftCommitLint.CommitLintType>([.subjectPeriod, .subjectWord])),
             fail: .all
         )
         let testSubject = DangerSwiftCommitLint(danger: mockDanger, configuration: configuration)
@@ -112,7 +112,7 @@ final class DangerSwiftCommitLintTests: XCTestCase {
     func testCustomChecker() {
         let git = CommitParser.parseGit(with: gitJSON)
         let mockDanger = MockDangerDSL(git: git)
-        let configuration = Configuration(warn: .all, customCheckers: [MockChecker.self])
+        let configuration = Configuration(warn: .all, custom: [MockChecker.self])
         let testSubject = DangerSwiftCommitLint(danger: mockDanger, configuration: configuration)
         testSubject.check()
         XCTAssertEqual(mockDanger.warningMessages, ["\(MockChecker.linterMessage)\ntestshacommit3\ntestshacommit2\ntestshacommit1"])

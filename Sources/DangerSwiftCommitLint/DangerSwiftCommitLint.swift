@@ -1,6 +1,8 @@
 import Danger
 import Foundation
 
+/// A protocol for dependency inject `DangerDSL`.
+/// - `DangerSwiftCommitLint` only require these interfaces.
 public protocol DangerDSLProviding {
     var git: Git { get }
 
@@ -10,6 +12,7 @@ public protocol DangerDSLProviding {
 
 extension DangerDSL: DangerDSLProviding {}
 
+/// A Danger-Swift plugin to lint each commit in the PR. See `Configuration` for linter configuration.
 public final class DangerSwiftCommitLint {
     private enum Constants {
         static let disableAllChecksMessage = "All checks were disabled, nothing to do."
@@ -22,7 +25,7 @@ public final class DangerSwiftCommitLint {
     /// - Parameters:
     ///   - danger: An instance of `Danger.DangerDSL`.
     ///   - configuration: Linter configuration.
-    public init(danger: DangerDSLProviding = Danger(), configuration: Configuration) {
+    public init(danger: DangerDSLProviding = Danger(), configuration: Configuration = .init()) {
         self.danger = danger
         self.configuration = configuration
     }

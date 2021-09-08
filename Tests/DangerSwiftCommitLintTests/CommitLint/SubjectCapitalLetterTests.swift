@@ -1,7 +1,7 @@
 @testable import DangerSwiftCommitLint
 import XCTest
 
-final class SubjectCapCheckTests: XCTestCase {
+final class SubjectCapitalLetterTests: XCTestCase {
     func testSuccess() {
         let commitMessage = GitCommitMessage(subject: "Subject", bodyLinesOfText: [], sha: "Test SHA")
         let testSubject = SubjectCapitalLetter(commitMessage)

@@ -2,7 +2,7 @@ import Danger
 @testable import DangerSwiftCommitLint
 import XCTest
 
-final class BodyEmptyLineCheckTests: XCTestCase {
+final class BodyEmptyLineTests: XCTestCase {
     private let commitSubjectAndBody = GitCommitMessage(subject: "Title Test", bodyLinesOfText: ["", "Body Test"], sha: "Test SHA")
     private let commitSubjectOnly = GitCommitMessage(subject: "Title Test", bodyLinesOfText: [], sha: "Test SHA")
     private let commitNoNewline = GitCommitMessage(subject: "Title Test", bodyLinesOfText: ["Body Test"], sha: "Test SHA")

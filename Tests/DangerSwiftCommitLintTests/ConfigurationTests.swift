@@ -22,7 +22,7 @@ final class DangerSwiftCommitLintConfigurationTests: XCTestCase {
     }
 
     func testDisableAllChecksWithCustomChecker() {
-        let testSubject = Configuration(disabled: .all, customCheckers: [MockChecker.self])
+        let testSubject = Configuration(disabled: .all, custom: [MockChecker.self])
         XCTAssertTrue(testSubject.enabledCheckers.isEmpty)
         XCTAssertEqual(testSubject.allCheckers.count, Configuration.defaultCheckers.count + 1)
         XCTAssertTrue(testSubject.allCheckers.isEqual(to: testSubject.disabledCheckers))
@@ -40,7 +40,7 @@ final class DangerSwiftCommitLintConfigurationTests: XCTestCase {
     }
 
     func testWarnAllChecksWithCustomChecker() {
-        let testSubject = Configuration(warn: .all, customCheckers: [MockChecker.self])
+        let testSubject = Configuration(warn: .all, custom: [MockChecker.self])
         XCTAssertEqual(testSubject.allCheckers.count, Configuration.defaultCheckers.count + 1)
         XCTAssertTrue(testSubject.enabledCheckers.isEqual(to: testSubject.allCheckers))
         XCTAssertTrue(testSubject.enabledCheckers.isEqual(to: testSubject.warningCheckers))
