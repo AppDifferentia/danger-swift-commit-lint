@@ -1,4 +1,5 @@
 import Danger
+import DangerSwiftCommitLint
 import Foundation
 
 let danger = Danger()
@@ -37,3 +38,7 @@ let foundWIPLabel = github.issue.labels.contains {
 if foundWIPMessageInTitle || foundWIPLabel {
     warn("PR is classed as Work in Progress")
 }
+
+let configuration = DangerSwiftCommitLint.Configuration(warn: .all)
+let commitLint = DangerSwiftCommitLint(danger: danger, configuration: configuration)
+commitLint.check()
