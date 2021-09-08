@@ -1,7 +1,7 @@
 @testable import DangerSwiftCommitLint
 import XCTest
 
-final class SubjectWordCheckTests: XCTestCase {
+final class SubjectWordTests: XCTestCase {
     func testSuccess() {
         let commitMessage = GitCommitMessage(subject: "Test title more than one word", bodyLinesOfText: [], sha: "Test SHA")
         let testSubject = SubjectWord(commitMessage)
