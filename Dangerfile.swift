@@ -1,4 +1,5 @@
 import Danger
+import DangerSwiftCommitLint
 import Foundation
 
 let danger = Danger()
@@ -20,6 +21,10 @@ let filesToLint = (danger.git.modifiedFiles + danger.git.createdFiles)
     .filter { URL(fileURLWithPath: $0).pathExtension == "swift" }
 
 SwiftLint.lint(.files(filesToLint), inline: true)
+
+let configuration = DangerSwiftCommitLint.Configuration(warn: .all)
+let commitLint = DangerSwiftCommitLint(danger: danger, configuration: configuration)
+commitLint.check()
 
 // Only run GitHub related checks when GitHub dsl is available. This allows `danger-swift local` to work.
 guard let github = danger.github else {

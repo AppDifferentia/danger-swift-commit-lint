@@ -18,7 +18,14 @@ let package = Package(
         .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
     ],
     targets: [
-        .target(name: "DangerDependencies", dependencies: [.product(name: "Danger", package: "danger-swift"), "DangerSwiftCoverage"]), // dev
+        .target( // dev
+            name: "DangerDependencies", // dev
+            dependencies: [ // dev
+                .product(name: "Danger", package: "danger-swift"), // dev
+                "DangerSwiftCoverage", // dev
+                "DangerSwiftCommitLint", // dev
+            ] // dev
+        ), // dev
         .target(name: "DangerSwiftCommitLint", dependencies: [.product(name: "Danger", package: "danger-swift")]),
         .testTarget(
             name: "DangerSwiftCommitLintTests",
