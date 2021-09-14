@@ -1,0 +1,32 @@
+---
+name: Test & Coverage
+description: Run tests, optionally gather coverage data and run danger
+inputs:
+  include-coverage:
+    description: Option to include a danger-swift coverage step
+    required: false
+    default: "false"
+  danger-token:
+    description: Option to include a token for danger related step
+    required: false
+    default: ""
+
+runs:
+  using: composite
+
+  steps:
+    - name: Run Tests
+      run: |
+        if [ ${{ inputs.include-coverage }} = true ]; then
+          npm install -g danger
+          swift test --enable-code-coverage
+          swift run danger-swift ci \
+            -c release \
+            --dangerfile DangerfileCoverage.swift \
+            --id "Coverage"
+        else
+          swift test
+        fi
+      shell: bash
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ inputs.danger-token }}
